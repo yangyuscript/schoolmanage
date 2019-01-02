@@ -1,6 +1,7 @@
 package com.sms.schoolmanage.parseutils;
 
 import com.sms.schoolmanage.constants.WebConstant;
+import com.sms.schoolmanage.domain.Course;
 import com.sms.schoolmanage.domain.Notice;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -126,9 +127,31 @@ public class SpiderUtil {
         return notices;
     }
 
-    public void getCourseTable(){
-        getConnection(String.format(WebConstant.WEBSITE_CLASS_COURSES_TABLE_URL,"16096601","18-19-1"));
-        String html = document.getElementById("GVkb").html();
+    public List<Course> getCourseTable(){
+        getConnection(String.format(WebConstant.WEBSITE_CLASS_COURSES_TABLE_URL,"15096601","18-19-1"));
+        List<Course> courses = new LinkedList<>();
+        Elements elements = document.getElementById("GVkb").getElementsByClass("dg1-item");
+        for(int i=0,len=elements.size();i<len;i++){
+           Elements tds = elements.get(i).getElementsByTag("td");
+           for(int j=1,len2=tds.size();j<len2;j++){
+               String kcmc = tds.get(j).html();
+               if(!kcmc.equals("&nbsp;")){
+                   Course course = new Course();
+                   course.setKcmc(kcmc);
+                   course.setXqj(j);
+                   course.setSkcd(2);
+                   String skjc = tds.get(0).text();
+                   if(skjc.length()>2){
+                       course.setSkjc(Integer.parseInt(skjc.substring(0,1)));
+                   }else{
+                       course.setSkjc(Integer.parseInt(skjc));
+                   }
+                   courses.add(course);
+               }
+           }
+           i++;
+        }
+        return courses;
     }
 
 

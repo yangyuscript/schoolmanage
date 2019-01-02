@@ -1,5 +1,6 @@
 package com.sms.schoolmanage.controller;
 
+import com.sms.schoolmanage.domain.Course;
 import com.sms.schoolmanage.domain.Notice;
 import com.sms.schoolmanage.parseutils.SpiderUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,4 +24,14 @@ public class IndexController {
         map.put("notices",notices);
         return map;
     }
+
+    @RequestMapping(value = "/courseTable",method = RequestMethod.GET)
+    public Map<String,Object> getCourseTable(){
+        SpiderUtil spiderUtil = new SpiderUtil();
+        List<Course> courses = spiderUtil.getCourseTable();
+        Map<String, Object> map = new HashMap<>();
+        map.put("courses",courses);
+        return map;
+    }
+
 }
