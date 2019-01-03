@@ -8,7 +8,7 @@ public class WebConstant {
     public static String WEBSITE_LOGINED_INDEX_URL = "http://jwgl.nustti.edu.cn/index3.aspx";
 
     /**
-     *获取通知
+     * 获取通知
      */
     public static String WEBSITE_NOTICE_URL = "http://jwgl.nustti.edu.cn/officetable6.aspx";
     /**
@@ -22,5 +22,14 @@ public class WebConstant {
      */
     public static String WEBSITE_SEARCH_CLASS_COURSES_TABLE_URL="http://jwgl.nustti.edu.cn/web_jxrw/cx_kb_bjxzall.aspx";
 
+    /**
+     * 考试安排查询(需登录)http://jwgl.nustti.edu.cn/web_ksgl/ksgl_ksapcx_sj.aspx?lb=%E5%AD%A6%E5%88%86%E5%88%B6%E6%9C%9F%E6%9C%AB%E8%80%83%E8%AF%95&xq=18-19-1&whfs=%E6%9F%A5%E8%AF%A2%E5%AD%A6%E7%94%9F%E9%80%89%E8%AF%BE%E8%AF%BE%E7%A8%8B%E8%80%83%E8%AF%95%E5%AE%89%E6%8E%92&kssj=&bh=1509660112&ksz=0
+     */
+    public static String WEBSITE_EXAMS_SETTING_URL="http://jwgl.nustti.edu.cn/web_ksgl/ksgl_ksapcx_sj.aspx?lb=%s&xq=%s&whfs=%s&kssj=&bh=%s&ksz=0";
+
     public static String LOG_ERROR_STR = "error-----------{}-----------error";
+
+    public static String WHFS = "查询学生选课课程考试安排";
+
+    public static String GET_PASSWORD = "登陆";
 }
