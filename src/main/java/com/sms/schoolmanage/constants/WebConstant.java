@@ -28,6 +28,13 @@ public class WebConstant {
      */
     public static String WEBSITE_EXAMS_SETTING_URL="http://jwgl.nustti.edu.cn/web_ksgl/ksgl_ksapcx_sj.aspx?lb=%s&xq=%s&whfs=%s&kssj=&bh=%s&ksz=0";
 
+    /**
+     *  获取考试成绩
+     */
+    public static String WEBSITE_SCORE_URL="http://jwgl.nustti.edu.cn/web_cjgl/cx_cj_xh.aspx";
+
+
+
     public static String LOG_ERROR_STR = "error-----------{}-----------error";
 
     public static String WHFS = "查询学生选课课程考试安排";

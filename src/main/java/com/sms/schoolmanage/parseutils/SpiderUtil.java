@@ -4,6 +4,7 @@ import com.sms.schoolmanage.constants.WebConstant;
 import com.sms.schoolmanage.domain.Course;
 import com.sms.schoolmanage.domain.Exam;
 import com.sms.schoolmanage.domain.Notice;
+import com.sms.schoolmanage.domain.Score;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -182,6 +183,30 @@ public class SpiderUtil {
         return examList;
     }
 
+    public List<Score> getScores(){
+        List<Score> scoreList = new LinkedList<>();
+        getConnection(WebConstant.WEBSITE_SCORE_URL);
+        String pjjd = document.getElementById("Txtjd").val();
+        Elements trs = document.getElementById("gvcj1").getElementsByClass("dg1-item");
+        for (Element tr:trs) {
+            Elements tds = tr.getElementsByTag("td");
+            Score score = new Score();
+            score.setXh(tds.get(0).text());
+            score.setXm(tds.get(1).text());
+            score.setXq(tds.get(2).text());
+            score.setKcmc(tds.get(3).text());
+            score.setLb(tds.get(4).text());
+            score.setXf(tds.get(5).text());
+            score.setCj(tds.get(6).text());
+            score.setKsxz(tds.get(7).text());
+            score.setJd(tds.get(8).text());
+            score.setKcdm(tds.get(9).text());
+            score.setXs(tds.get(10).text());
+            score.setPjjd(pjjd);
+            scoreList.add(score);
+        }
+        return scoreList;
+    }
 
     //共用方法
     private void getConnection(String url) {

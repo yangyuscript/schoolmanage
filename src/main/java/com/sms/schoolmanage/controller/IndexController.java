@@ -4,6 +4,7 @@ import com.sms.schoolmanage.constants.WebConstant;
 import com.sms.schoolmanage.domain.Course;
 import com.sms.schoolmanage.domain.Exam;
 import com.sms.schoolmanage.domain.Notice;
+import com.sms.schoolmanage.domain.Score;
 import com.sms.schoolmanage.parseutils.SpiderUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +46,17 @@ public class IndexController {
         List<Exam> exams = spiderUtil.getExams(lb,xq,bh);
         Map<String, Object> map = new HashMap<>();
         map.put("exams",exams);
+        return map;
+    }
+
+    @RequestMapping(value = "/scores",method = RequestMethod.GET)
+    public Map<String,Object> getExamSetting(@RequestParam("userName")String userName,@RequestParam("password")String password){
+        SpiderUtil spiderUtil = new SpiderUtil();
+        spiderUtil.init();
+        spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
+        List<Score> scores = spiderUtil.getScores();
+        Map<String, Object> map = new HashMap<>();
+        map.put("scores",scores);
         return map;
     }
 
