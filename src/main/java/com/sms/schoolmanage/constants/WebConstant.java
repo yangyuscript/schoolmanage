@@ -40,4 +40,8 @@ public class WebConstant {
     public static String WHFS = "查询学生选课课程考试安排";
 
     public static String GET_PASSWORD = "登陆";
+
+    public static String OK = "ok";
+
+    public static String NO = "no";
 }

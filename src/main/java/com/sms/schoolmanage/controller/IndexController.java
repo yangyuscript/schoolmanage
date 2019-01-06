@@ -6,6 +6,8 @@ import com.sms.schoolmanage.domain.Exam;
 import com.sms.schoolmanage.domain.Notice;
 import com.sms.schoolmanage.domain.Score;
 import com.sms.schoolmanage.parseutils.SpiderUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,26 @@ import java.util.Map;
 @RestController
 @RequestMapping("/index")
 public class IndexController {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public Map<String,Object> login(@RequestParam("userName") String userName, @RequestParam("password") String password){
+        log.error(WebConstant.LOG_ERROR_STR,userName);
+        log.error(WebConstant.LOG_ERROR_STR,password);
+        SpiderUtil spiderUtil = new SpiderUtil();
+        spiderUtil.init();
+        boolean flag = spiderUtil.login(userName,password, WebConstant.GET_PASSWORD);
+        Map<String, Object> map = new HashMap<>();
+        if(flag){
+            //登录成功
+            map.put("result",WebConstant.OK);
+        }else{
+            //登录失败
+            map.put("result",WebConstant.NO);
+        }
+        return map;
+    }
+
     @RequestMapping(value = "/notices",method = RequestMethod.GET)
     public Map<String,Object> getNotices(@RequestParam("userName")String userName,@RequestParam("password")String password){
         SpiderUtil spiderUtil = new SpiderUtil();
