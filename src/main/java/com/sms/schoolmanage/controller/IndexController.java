@@ -1,10 +1,7 @@
 package com.sms.schoolmanage.controller;
 
 import com.sms.schoolmanage.constants.WebConstant;
-import com.sms.schoolmanage.domain.Course;
-import com.sms.schoolmanage.domain.Exam;
-import com.sms.schoolmanage.domain.Notice;
-import com.sms.schoolmanage.domain.Score;
+import com.sms.schoolmanage.domain.*;
 import com.sms.schoolmanage.parseutils.SpiderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,6 +76,40 @@ public class IndexController {
         List<Score> scores = spiderUtil.getScores();
         Map<String, Object> map = new HashMap<>();
         map.put("scores",scores);
+        return map;
+    }
+
+    @RequestMapping(value = "/studentInfo",method = RequestMethod.GET)
+    public Map<String,Object> studentInfo(@RequestParam("userName")String userName,@RequestParam("password")String password){
+        SpiderUtil spiderUtil = new SpiderUtil();
+        spiderUtil.init();
+        spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
+        Student student = spiderUtil.getStudentInfo();
+        Map<String, Object> map = new HashMap<>();
+        map.put("studentInfo",student);
+        return map;
+    }
+
+
+
+    @RequestMapping(value = "/initIndex",method = RequestMethod.GET)
+    public Map<String,Object> initIndex(@RequestParam("userName")String userName,@RequestParam("password")String password){
+        SpiderUtil spiderUtil = new SpiderUtil();
+        spiderUtil.init();
+        boolean flag = spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
+        Map<String, Object> map = new HashMap<>();
+        if(flag){
+            List<Score> scores = spiderUtil.getScores();
+            List<Notice> notices = spiderUtil.getNotices();
+            Student studentInfo = spiderUtil.getStudentInfo();
+            map.put("result",WebConstant.OK);
+            map.put("scores",scores);
+            map.put("notices",notices);
+            map.put("studentInfo",studentInfo);
+        }else{
+            map.put("result",WebConstant.NO);
+        }
+
         return map;
     }
 

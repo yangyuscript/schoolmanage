@@ -12,6 +12,7 @@ public class Test {
         /*List<Notice> notices = spiderUtil.getNotices();
         System.out.println(notices.size()+notices.toString());
         System.out.println(spiderUtil.getExams("学分制期末考试","18-19-1","1509660112"));*/
-        System.out.println(spiderUtil.getScores());
+        //System.out.println(spiderUtil.getScores());
+        System.out.println(spiderUtil.getStudentInfo());
     }
 }

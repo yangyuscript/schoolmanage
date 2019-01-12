@@ -8,7 +8,7 @@ public class WebConstant {
     public static String WEBSITE_LOGINED_INDEX_URL = "http://jwgl.nustti.edu.cn/index3.aspx";
 
     /**
-     * 获取通知
+     * 获取通知（需登录）
      */
     public static String WEBSITE_NOTICE_URL = "http://jwgl.nustti.edu.cn/officetable6.aspx";
     /**
@@ -18,7 +18,7 @@ public class WebConstant {
     public static String WEBSITE_CLASS_COURSES_TABLE_URL="http://jwgl.nustti.edu.cn/web_jxrw/cx_kb_bjkb_bj.aspx?xsbh=%s&xq=%s";
 
     /**
-     * 课表查询页面
+     * 课表查询页面（需登录）
      */
     public static String WEBSITE_SEARCH_CLASS_COURSES_TABLE_URL="http://jwgl.nustti.edu.cn/web_jxrw/cx_kb_bjxzall.aspx";
 
@@ -29,9 +29,17 @@ public class WebConstant {
     public static String WEBSITE_EXAMS_SETTING_URL="http://jwgl.nustti.edu.cn/web_ksgl/ksgl_ksapcx_sj.aspx?lb=%s&xq=%s&whfs=%s&kssj=&bh=%s&ksz=0";
 
     /**
-     *  获取考试成绩
+     *  获取考试成绩（需登录）
      */
     public static String WEBSITE_SCORE_URL="http://jwgl.nustti.edu.cn/web_cjgl/cx_cj_xh.aspx";
+
+
+    /**
+     * 获取学生个人信息（需登录）
+     */
+    public static String WEBSITE_PERSONAL_INFO_URL="http://jwgl.nustti.edu.cn/web_xjgl/xjgl_wh_tj_xsxx.aspx";
+
+
 
 
 

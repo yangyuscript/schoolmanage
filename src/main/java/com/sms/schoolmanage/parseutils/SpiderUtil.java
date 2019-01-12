@@ -1,10 +1,7 @@
 package com.sms.schoolmanage.parseutils;
 
 import com.sms.schoolmanage.constants.WebConstant;
-import com.sms.schoolmanage.domain.Course;
-import com.sms.schoolmanage.domain.Exam;
-import com.sms.schoolmanage.domain.Notice;
-import com.sms.schoolmanage.domain.Score;
+import com.sms.schoolmanage.domain.*;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -207,6 +204,45 @@ public class SpiderUtil {
         }
         return scoreList;
     }
+
+    public Student getStudentInfo(){
+        getConnection(WebConstant.WEBSITE_PERSONAL_INFO_URL);
+        Student student = new Student();
+        student.setBh(document.getElementById("Txtbh").val());
+        student.setBj(document.getElementById("Txtbj").val());
+        student.setXh(document.getElementById("Txtxh").val());
+        student.setXm(document.getElementById("Txtxm").val());
+        student.setXb(document.getElementById("Txtxb").val());
+        student.setCsrq(document.getElementById("Txtcsny").val());
+        student.setXz(document.getElementById("Txtxz").val());
+        student.setYxmc(document.getElementById("Txtxbmc").val());
+        student.setJg(document.getElementById("Txtjg").val());
+        student.setZymc(document.getElementById("Txtzymc").val());
+        student.setMz(document.getElementById("Txtmzm").val());
+        student.setZydm(document.getElementById("Txtzydm").val());
+        student.setSylb(document.getElementById("Txtsylb").val());
+        student.setSfzh(document.getElementById("Txtsfzh").val());
+        student.setNj(document.getElementById("Txtnj").val());
+        student.setZzmm(document.getElementById("Txtzzmm").val());
+        student.setRxrq(document.getElementById("Txtrxrq").val());
+        student.setZkzh(document.getElementById("Txtzkzh").val());
+        student.setZxqxstc(document.getElementById("Txtkstc").val());
+        student.setGkcj(document.getElementById("Txtgkcj").val());
+        student.setGkgkcj(document.getElementById("Txtkccj").val());
+        student.setRxqjcqk(document.getElementById("Txtjlcf").val());
+        student.setJtlxr(document.getElementById("Txtlxr").val());
+        student.setJtdh(document.getElementById("Txtlxdh").val());
+        student.setJtdz(document.getElementById("Txtjtdz").val());
+        student.setYb(document.getElementById("Txtcode").val());
+        student.setWxh(document.getElementById("Txtwxh").val());
+        student.setBrdh(document.getElementById("Txttel2").val());
+        student.setHczdz(document.getElementById("Txtccqj").val());
+        student.setRxzp(WebConstant.WEBSITE_INDEX_URL+document.getElementById("Image1").attr("src").substring(3));
+        student.setZxzp(WebConstant.WEBSITE_INDEX_URL+document.getElementById("Image2").attr("src").substring(3));
+        student.setByzp(WebConstant.WEBSITE_INDEX_URL+document.getElementById("Image3").attr("src").substring(3));
+        return student;
+    }
+
 
     //共用方法
     private void getConnection(String url) {
