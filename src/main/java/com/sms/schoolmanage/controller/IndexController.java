@@ -2,6 +2,7 @@ package com.sms.schoolmanage.controller;
 
 import com.sms.schoolmanage.constants.WebConstant;
 import com.sms.schoolmanage.domain.*;
+import com.sms.schoolmanage.parseutils.DateUtil;
 import com.sms.schoolmanage.parseutils.SpiderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -93,19 +95,24 @@ public class IndexController {
 
 
     @RequestMapping(value = "/initIndex",method = RequestMethod.GET)
-    public Map<String,Object> initIndex(@RequestParam("userName")String userName,@RequestParam("password")String password){
+    public Map<String,Object> initIndex(@RequestParam("userName")String userName,@RequestParam("password")String password,@RequestParam("bh")String bh,@RequestParam("xq")String xq){
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         boolean flag = spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
         Map<String, Object> map = new HashMap<>();
         if(flag){
-            List<Score> scores = spiderUtil.getScores();
             List<Notice> notices = spiderUtil.getNotices();
-            Student studentInfo = spiderUtil.getStudentInfo();
+            List<Course> courses = spiderUtil.getCourseTable(bh,xq);
+            Integer weekDay = DateUtil.getWeekOfDate();
+            List<Course> todayCourses = new LinkedList<>();
+            for (Course c: courses) {
+                if(weekDay.equals(c.getXqj())){
+                    todayCourses.add(c);
+                }
+            }
             map.put("result",WebConstant.OK);
-            map.put("scores",scores);
             map.put("notices",notices);
-            map.put("studentInfo",studentInfo);
+            map.put("todayCourses",todayCourses);
         }else{
             map.put("result",WebConstant.NO);
         }
