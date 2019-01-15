@@ -23,6 +23,9 @@ public class SpiderUtil {
     private Connection connection;
     private Connection.Response response;
     private Document document;
+    //单双周
+    private Integer week;
+    private String term;
 
 
     public void init() {
@@ -56,9 +59,9 @@ public class SpiderUtil {
         }
     }
 
-    public boolean login(String userName, String password, String getPassword) {
+    public Map<String,Object> login(String userName, String password, String getPassword) {
         boolean flag = false;
-
+        Map<String,Object> result = new HashMap<>();
         //填充post数据
         Map<String, String> datas = new HashMap<>();
         datas.put("__VIEWSTATE", viewState);
@@ -86,6 +89,11 @@ public class SpiderUtil {
                 log.error(WebConstant.LOG_ERROR_STR, content);
                 String stuName = content.split(" ")[1].trim();
                 log.error(WebConstant.LOG_ERROR_STR, stuName);
+                String text = document.getElementById("FormView1").getElementsByTag("td").text().trim();
+                String s = document.getElementById("FormView1").getElementsByTag("td").text().trim().split("\\|")[1];
+                this.week = Integer.valueOf(s.substring(1,s.length()-1));
+                log.error(WebConstant.LOG_ERROR_STR, "第"+this.week+"周");
+                this.term = text.split(" ")[1];
                 flag = true;
             } else {
                 log.error(WebConstant.LOG_ERROR_STR, "登录失败!");
@@ -95,7 +103,10 @@ public class SpiderUtil {
             ex.printStackTrace();
             flag = false;
         }
-        return flag;
+        result.put("flag",flag);
+        result.put("week",this.week);
+        result.put("term",this.term);
+        return result;
     }
 
     public List<Notice> getNotices() {
@@ -134,6 +145,14 @@ public class SpiderUtil {
                 String kcmc = tds.get(j).html();
                 if (!kcmc.equals("&nbsp;")) {
                     Course course = new Course();
+                    String[] kcmc_array = kcmc.split("/");
+                    if(kcmc_array.length>1){
+                        if(this.week%2==0){
+                            kcmc = kcmc_array[1];
+                        }else{
+                            kcmc = kcmc_array[0];
+                        }
+                    }
                     course.setKcmc(kcmc);
                     course.setXqj(j);
                     course.setSkcd(2);

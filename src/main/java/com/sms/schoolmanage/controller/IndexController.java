@@ -27,9 +27,9 @@ public class IndexController {
         log.error(WebConstant.LOG_ERROR_STR,password);
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
-        boolean flag = spiderUtil.login(userName,password, WebConstant.GET_PASSWORD);
+        Map<String,Object> result = spiderUtil.login(userName,password, WebConstant.GET_PASSWORD);
         Map<String, Object> map = new HashMap<>();
-        if(flag){
+        if((Boolean)result.get("flag")){
             //登录成功
             map.put("result",WebConstant.OK);
         }else{
@@ -51,8 +51,10 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/courseTable",method = RequestMethod.GET)
-    public Map<String,Object> getCourseTable(@RequestParam("bh")String bh,@RequestParam("xq")String xq){
+    public Map<String,Object> getCourseTable(@RequestParam("userName")String userName,@RequestParam("password")String password,@RequestParam("bh")String bh,@RequestParam("xq")String xq){
         SpiderUtil spiderUtil = new SpiderUtil();
+        spiderUtil.init();
+        spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
         List<Course> courses = spiderUtil.getCourseTable(bh,xq);
         Map<String, Object> map = new HashMap<>();
         map.put("courses",courses);
@@ -98,7 +100,7 @@ public class IndexController {
     public Map<String,Object> initIndex(@RequestParam("userName")String userName,@RequestParam("password")String password,@RequestParam("bh")String bh,@RequestParam("xq")String xq){
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
-        boolean flag = spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
+        boolean flag = (Boolean)spiderUtil.login(userName,password,WebConstant.GET_PASSWORD).get("flag");
         Map<String, Object> map = new HashMap<>();
         if(flag){
             List<Notice> notices = spiderUtil.getNotices();
