@@ -49,6 +49,10 @@ public class WebConstant {
 
     public static String GET_PASSWORD = "登陆";
 
+    public static String ANORMAL_EXAMS = "不及格课程补考";
+
+    public static String NORMAL_EXAMS = "学分制期末考试";
+
     public static String OK = "ok";
 
     public static String NO = "no";

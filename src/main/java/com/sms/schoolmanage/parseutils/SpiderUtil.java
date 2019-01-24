@@ -122,7 +122,8 @@ public class SpiderUtil {
                 String title = dg1_item.getElementsByTag("a").get(0).text();
                 String time = dg1_item.getElementsByTag("td").get(1).text();
                 getConnection(WebConstant.WEBSITE_INDEX_URL + href);
-                String content = document.getElementById("listcolumn").html();
+                //String content = document.getElementById("listcolumn").html().replace("\"","'");
+                String content = document.getElementsByClass("ziti14").html().replace("\"","'");
                 notice.setUrl(href);
                 notice.setTitle(title);
                 notice.setTime(time);
@@ -179,19 +180,19 @@ public class SpiderUtil {
             for (int i = 0, len = trs.size(); i < len; i++) {
                 Elements tds = trs.get(i).getElementsByTag("td");
                 Exam exam = new Exam();
-                exam.setSchool(tds.get(0).text());
-                exam.setCourseCode(tds.get(1).text());
-                exam.setCourseName(tds.get(2).text());
-                exam.setClassName(tds.get(3).text());
-                exam.setExamTime(tds.get(4).text());
-                exam.setExamAddress(tds.get(5).text());
-                exam.setMonitorOne(tds.get(6).text());
-                exam.setMonitorTwo(tds.get(7).text());
-                exam.setRemark(tds.get(8).text());
-                exam.setExamWeek(tds.get(9).text());
-                exam.setWeek(tds.get(10).text());
-                exam.setSectionOne(tds.get(11).text());
-                exam.setSectionTwo(tds.get(12).text());
+                exam.setSchool(tds.get(0).html().trim().equals("&nbsp;")?"待定":tds.get(0).text());
+                exam.setCourseCode(tds.get(1).html().trim().equals("&nbsp;")?"待定":tds.get(1).text());
+                exam.setCourseName(tds.get(2).html().trim().equals("&nbsp;")?"待定":tds.get(2).text());
+                exam.setClassName(tds.get(3).html().trim().equals("&nbsp;")?"待定":tds.get(3).text());
+                exam.setExamTime(tds.get(4).html().trim().equals("&nbsp;")?"待定":tds.get(4).text());
+                exam.setExamAddress(tds.get(5).html().trim().equals("&nbsp;")?"待定":tds.get(5).text());
+                exam.setMonitorOne(tds.get(6).html().trim().equals("&nbsp;")?"待定":tds.get(6).text());
+                exam.setMonitorTwo(tds.get(7).html().trim().equals("&nbsp;")?"待定":tds.get(7).text());
+                exam.setRemark(tds.get(8).html().trim().equals("&nbsp;")?"无":tds.get(8).text());
+                exam.setExamWeek(tds.get(9).html().trim().equals("&nbsp;")?"待定":tds.get(9).text());
+                exam.setWeek(tds.get(10).html().trim().equals("&nbsp;")?"待定":tds.get(10).text());
+                exam.setSectionOne(tds.get(11).html().trim().equals("&nbsp;")?"待定":tds.get(11).text());
+                exam.setSectionTwo(tds.get(12).html().trim().equals("&nbsp;")?"待定":tds.get(12).text());
                 examList.add(exam);
             }
         }
@@ -268,7 +269,7 @@ public class SpiderUtil {
         try {
             connection = Jsoup.connect(url);
             connection.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
-            connection.postDataCharset("UTF-8").ignoreContentType(true).method(Connection.Method.GET).cookies(cookies).timeout(5000);
+            connection.postDataCharset("UTF-8").ignoreContentType(true).method(Connection.Method.GET).cookies(cookies);
             response = connection.execute();
             //cookies = response.cookies();   //此句话会将cookies设置为空，不能随便使用
             document = Jsoup.parse(response.body());

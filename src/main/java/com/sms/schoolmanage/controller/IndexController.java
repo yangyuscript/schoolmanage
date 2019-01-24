@@ -66,9 +66,18 @@ public class IndexController {
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
-        List<Exam> exams = spiderUtil.getExams(lb,xq,bh);
         Map<String, Object> map = new HashMap<>();
+        if("all".equals(lb)){
+            List<Exam> normalExams = spiderUtil.getExams(WebConstant.NORMAL_EXAMS,xq,bh);
+            List<Exam> anormalExams = spiderUtil.getExams(WebConstant.ANORMAL_EXAMS,xq,bh);
+            map.put("searchType","all");
+            map.put("normalExams",normalExams);
+            map.put("anormalExams",anormalExams);
+            return map;
+        }
+        List<Exam> exams = spiderUtil.getExams(lb,xq,bh);
         map.put("exams",exams);
+        map.put("searchType",lb);
         return map;
     }
 
