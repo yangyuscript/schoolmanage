@@ -61,6 +61,15 @@ public class IndexController {
         return map;
     }
 
+    @RequestMapping(value = "/courseDetail",method = RequestMethod.GET)
+    public Map<String,Object> getCourseDetail(@RequestParam("bh")String bh,@RequestParam("xq")String xq){
+        SpiderUtil spiderUtil = new SpiderUtil();
+        List<CourseDetail> courseDetail = spiderUtil.getCourseDetails(bh,xq);
+        Map<String, Object> map = new HashMap<>();
+        map.put("courseDetail",courseDetail);
+        return map;
+    }
+
     @RequestMapping(value = "/examSetting",method = RequestMethod.GET)
     public Map<String,Object> getExamSetting(@RequestParam("userName")String userName,@RequestParam("password")String password,@RequestParam("lb")String lb,@RequestParam("xq")String xq,@RequestParam("bh")String bh){
         SpiderUtil spiderUtil = new SpiderUtil();
@@ -100,6 +109,17 @@ public class IndexController {
         Student student = spiderUtil.getStudentInfo();
         Map<String, Object> map = new HashMap<>();
         map.put("studentInfo",student);
+        return map;
+    }
+
+    @RequestMapping(value = "/levelTest",method = RequestMethod.GET)
+    public Map<String,Object> levelTest(@RequestParam("userName")String userName,@RequestParam("password")String password){
+        SpiderUtil spiderUtil = new SpiderUtil();
+        spiderUtil.init();
+        spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
+        List<LevelTest> ltList = spiderUtil.getLevelTest();
+        Map<String, Object> map = new HashMap<>();
+        map.put("levelTests",ltList);
         return map;
     }
 

@@ -94,6 +94,7 @@ public class SpiderUtil {
                 this.week = Integer.valueOf(s.substring(1,s.length()-1));
                 log.error(WebConstant.LOG_ERROR_STR, "第"+this.week+"周");
                 this.term = text.split(" ")[1];
+                log.error(WebConstant.LOG_ERROR_STR, "第"+this.term+"学期");
                 flag = true;
             } else {
                 log.error(WebConstant.LOG_ERROR_STR, "登录失败!");
@@ -261,6 +262,50 @@ public class SpiderUtil {
         student.setZxzp(WebConstant.WEBSITE_INDEX_URL+document.getElementById("Image2").attr("src").substring(3));
         student.setByzp(WebConstant.WEBSITE_INDEX_URL+document.getElementById("Image3").attr("src").substring(3));
         return student;
+    }
+
+    public List<CourseDetail> getCourseDetails(String bh,String xq){
+        getConnection(String.format(WebConstant.WEBSITE_CLASS_COURSES_TABLE_URL, bh, xq));
+        List<CourseDetail> cdList = new LinkedList<>();
+        Elements elements = document.getElementById("GVkbk").getElementsByClass("dg1-item");
+        for (int i = 0, len = elements.size(); i < len; i++) {
+            Elements tds = elements.get(i).getElementsByTag("td");
+            CourseDetail cd = new CourseDetail();
+            cd.setCdid(0);
+            cd.setCid(0);
+            cd.setBj(tds.get(0).text());
+            cd.setKch(tds.get(1).text());
+            cd.setKcmc(tds.get(2).text());
+            cd.setKclb(tds.get(3).text());
+            cd.setKh(tds.get(4).text());
+            cd.setZxs(tds.get(5).text());
+            cd.setXf(tds.get(6).text());
+            cd.setSkjs(tds.get(7).text());
+            cd.setSjzc(tds.get(8).text());
+            cdList.add(cd);
+        }
+        return cdList;
+    }
+
+    public List<LevelTest> getLevelTest(){
+        getConnection(WebConstant.WEBSITE_LEVEL_TEST_URL);
+        List<LevelTest> ltList = new LinkedList<>();
+        Elements elements = document.getElementById("GVcet").getElementsByClass("dg1-item");
+        for (int i = 0, len = elements.size(); i < len; i++) {
+            Elements tds = elements.get(i).getElementsByTag("td");
+            LevelTest lt = new LevelTest();
+            lt.setLtid(0);
+            lt.setBj(tds.get(0).text());
+            lt.setXh(tds.get(1).text());
+            lt.setXm(tds.get(2).text());
+            lt.setKsny(tds.get(3).text());
+            lt.setYzdm(tds.get(4).text());
+            lt.setYzmc(tds.get(5).text());
+            lt.setZkzhm(tds.get(6).text());
+            lt.setKscj(tds.get(7).text());
+            ltList.add(lt);
+        }
+        return ltList;
     }
 
 

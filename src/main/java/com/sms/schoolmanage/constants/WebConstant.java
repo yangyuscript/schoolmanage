@@ -39,6 +39,10 @@ public class WebConstant {
      */
     public static String WEBSITE_PERSONAL_INFO_URL="http://jwgl.nustti.edu.cn/web_xjgl/xjgl_wh_tj_xsxx.aspx";
 
+    /**
+     * 等级考试成绩
+     */
+    public static String WEBSITE_LEVEL_TEST_URL="http://jwgl.nustti.edu.cn/web_cjgl/cx_cetjsj_xscj_xh.aspx";
 
 
 
