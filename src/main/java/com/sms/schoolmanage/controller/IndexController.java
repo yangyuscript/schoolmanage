@@ -25,6 +25,7 @@ public class IndexController {
     public Map<String,Object> login(@RequestParam("userName") String userName, @RequestParam("password") String password){
         log.error(WebConstant.LOG_ERROR_STR,userName);
         log.error(WebConstant.LOG_ERROR_STR,password);
+        log.error(WebConstant.LOG_ERROR_STR,"login操作");
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         Map<String,Object> result = spiderUtil.login(userName,password, WebConstant.GET_PASSWORD);
@@ -41,6 +42,7 @@ public class IndexController {
 
     @RequestMapping(value = "/notices",method = RequestMethod.GET)
     public Map<String,Object> getNotices(@RequestParam("userName")String userName,@RequestParam("password")String password){
+        log.error(WebConstant.LOG_ERROR_STR,"notices操作");
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         spiderUtil.login(userName,password, WebConstant.GET_PASSWORD);
@@ -52,6 +54,7 @@ public class IndexController {
 
     @RequestMapping(value = "/courseTable",method = RequestMethod.GET)
     public Map<String,Object> getCourseTable(@RequestParam("userName")String userName,@RequestParam("password")String password,@RequestParam("bh")String bh,@RequestParam("xq")String xq){
+        log.error(WebConstant.LOG_ERROR_STR,"courseTable操作");
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
@@ -63,6 +66,7 @@ public class IndexController {
 
     @RequestMapping(value = "/courseDetail",method = RequestMethod.GET)
     public Map<String,Object> getCourseDetail(@RequestParam("bh")String bh,@RequestParam("xq")String xq){
+        log.error(WebConstant.LOG_ERROR_STR,"courseDetail操作");
         SpiderUtil spiderUtil = new SpiderUtil();
         List<CourseDetail> courseDetail = spiderUtil.getCourseDetails(bh,xq);
         Map<String, Object> map = new HashMap<>();
@@ -72,6 +76,7 @@ public class IndexController {
 
     @RequestMapping(value = "/examSetting",method = RequestMethod.GET)
     public Map<String,Object> getExamSetting(@RequestParam("userName")String userName,@RequestParam("password")String password,@RequestParam("lb")String lb,@RequestParam("xq")String xq,@RequestParam("bh")String bh){
+        log.error(WebConstant.LOG_ERROR_STR,"examSetting操作");
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
@@ -92,6 +97,7 @@ public class IndexController {
 
     @RequestMapping(value = "/scores",method = RequestMethod.GET)
     public Map<String,Object> getExamSetting(@RequestParam("userName")String userName,@RequestParam("password")String password){
+        log.error(WebConstant.LOG_ERROR_STR,"scores操作");
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
@@ -103,6 +109,7 @@ public class IndexController {
 
     @RequestMapping(value = "/studentInfo",method = RequestMethod.GET)
     public Map<String,Object> studentInfo(@RequestParam("userName")String userName,@RequestParam("password")String password){
+        log.error(WebConstant.LOG_ERROR_STR,"studentInfo操作");
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
@@ -114,6 +121,7 @@ public class IndexController {
 
     @RequestMapping(value = "/levelTest",method = RequestMethod.GET)
     public Map<String,Object> levelTest(@RequestParam("userName")String userName,@RequestParam("password")String password){
+        log.error(WebConstant.LOG_ERROR_STR,"levelTest操作");
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         spiderUtil.login(userName,password,WebConstant.GET_PASSWORD);
@@ -127,6 +135,7 @@ public class IndexController {
 
     @RequestMapping(value = "/initIndex",method = RequestMethod.GET)
     public Map<String,Object> initIndex(@RequestParam("userName")String userName,@RequestParam("password")String password,@RequestParam("bh")String bh,@RequestParam("xq")String xq){
+        log.error(WebConstant.LOG_ERROR_STR,"initIndex操作");
         SpiderUtil spiderUtil = new SpiderUtil();
         spiderUtil.init();
         boolean flag = (Boolean)spiderUtil.login(userName,password,WebConstant.GET_PASSWORD).get("flag");

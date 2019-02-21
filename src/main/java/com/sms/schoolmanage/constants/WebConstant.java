@@ -47,7 +47,7 @@ public class WebConstant {
 
 
 
-    public static String LOG_ERROR_STR = "error-----------{}-----------error";
+    public static String LOG_ERROR_STR = "*-----------{}-----------*";
 
     public static String WHFS = "查询学生选课课程考试安排";
 
