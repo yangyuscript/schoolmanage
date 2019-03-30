@@ -44,7 +44,10 @@ public class WebConstant {
      */
     public static String WEBSITE_LEVEL_TEST_URL="http://jwgl.nustti.edu.cn/web_cjgl/cx_cetjsj_xscj_xh.aspx";
 
-
+    /**
+     * 学生公共选修选课
+     */
+    public static String WEBSITE_COMMON_COURSES_INFO="http://jwgl.nustti.edu.cn/web_xsxk/cx_ggxx_xsxkcj.aspx?xsxh=%s&lb=%s";
 
 
     public static String LOG_ERROR_STR = "*-----------{}-----------*";
@@ -56,6 +59,8 @@ public class WebConstant {
     public static String ANORMAL_EXAMS = "不及格课程补考";
 
     public static String NORMAL_EXAMS = "学分制期末考试";
+
+    public static String COMMON_COURSE = "公共选修";
 
     public static String OK = "ok";
 

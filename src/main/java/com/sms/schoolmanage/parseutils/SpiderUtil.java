@@ -308,6 +308,27 @@ public class SpiderUtil {
         return ltList;
     }
 
+    public List<CommonCourse> getCommonCourse(String xh,String lb){
+        getConnection(String.format(WebConstant.WEBSITE_COMMON_COURSES_INFO,xh,lb));
+        List<CommonCourse> ccList = new LinkedList<>();
+        Elements elements = document.getElementById("GVxkall").getElementsByClass("dg1-item");
+        for (Element element:elements) {
+            Elements tds = element.getElementsByTag("td");
+            CommonCourse cc = new CommonCourse();
+            cc.setCcid(0L);
+            cc.setXq(tds.get(0).text());
+            cc.setKcdm(tds.get(1).text());
+            cc.setKcmc(tds.get(2).text());
+            cc.setKclb(tds.get(3).text());
+            cc.setXf(tds.get(4).text());
+            cc.setSkjs(tds.get(5).text());
+            cc.setSksj(tds.get(6).text());
+            ccList.add(cc);
+        }
+        return ccList;
+    }
+
+
 
     //共用方法
     private void getConnection(String url) {

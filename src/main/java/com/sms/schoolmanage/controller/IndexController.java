@@ -131,6 +131,17 @@ public class IndexController {
         return map;
     }
 
+    @RequestMapping(value = "/getCommonCourse",method = RequestMethod.GET)
+    public Map<String,Object> getCommonCourse(@RequestParam("userName")String userName,@RequestParam("password")String password,@RequestParam("xh")String xh){
+        log.error(WebConstant.LOG_ERROR_STR,"getCommonCourse操作");
+        SpiderUtil spiderUtil = new SpiderUtil();
+        spiderUtil.init();
+        List<CommonCourse> commonCourses = spiderUtil.getCommonCourse(xh,WebConstant.COMMON_COURSE);
+        Map<String, Object> map = new HashMap<>();
+        map.put("commonCourses",commonCourses);
+        return map;
+    }
+
 
 
     @RequestMapping(value = "/initIndex",method = RequestMethod.GET)
@@ -156,7 +167,6 @@ public class IndexController {
         }else{
             map.put("result",WebConstant.NO);
         }
-
         return map;
     }
 
