@@ -1,42 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <!--控制台日志输出配置-->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <!--对输出日志进行格式化-->
+<configuration  scan="true" scanPeriod="10 seconds">
+
+    <contextName>logback</contextName>
+
+
+    <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
+    <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+
+    <!-- 定义日志存储的路   径，不要配置相对路径 -->
+    <property name="FILE_PATH" value="/root/log/sm-log.%d{yyyy-MM-dd}.%i.log" />
+
+    <!-- 控制台输出日志 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 日志级别过滤INFO以下 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
         <encoder>
-            <!-- %d日期,%p日志级别,%file文件名,%line所在行数,%m输出的信息,%n换行 -->
-            <pattern>%d %p (%file:%line\)- %m%n</pattern>
-            <!--字符编码-->
-            <charset>UTF-8</charset><!--此处设置字符集-->
+            <!-- 按照上面配置的LOG_PATTERN来打印日志 -->
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-    <!--指定日志输出等级-->
-    <root level="info">
-        <appender-ref ref="STDOUT" />
-    </root>
 
-    <!--上述配置表名将 >=info级别的日志都输出到控制台-->
+    <!--每天生成一个日志文件，保存30天的日志文件。rollingFile用来切分文件的 -->
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
-    <!--日志文件配置-->
-    <appender name="mylog"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。-->
-        <File>F:\log\mylog</File>
-        <!--滚动记录文件：根据时间来制定滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>F:\log\base.log.%d.%i</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy  class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>64 MB</maxFileSize>
+
+            <fileNamePattern>${FILE_PATH}</fileNamePattern>
+
+            <!-- keep 15 days' worth of history -->
+            <maxHistory>30</maxHistory>
+
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 日志文件的最大大小 -->
+                <maxFileSize>2MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
+
+            <!-- 超出删除老文件 -->
+            <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
+
         <encoder>
-            <pattern>
-                %d %p (%file:%line\)- %m%n
-            </pattern>
-            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-    <logger name="com.example" level="DEBUG">
-        <appender-ref ref="mylog" />
-    </logger>
+
+    <!-- project default level -->
+    <logger name="net.sh.rgface.serive" level="ERROR" />
+
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="console" />
+        <appender-ref ref="rollingFile" />
+    </root>
 </configuration>

@@ -50,6 +50,10 @@ public class WebConstant {
     public static String WEBSITE_SCHOOL_DATE_PIC_URL="http://www.nustti.edu.cn//ueditor/php/upload/image/20190216/1550281719898675.png";
 
 
+    /**
+     * 学生公共选修选课
+     */
+    public static String WEBSITE_COMMON_COURSES_INFO="http://jwgl.nustti.edu.cn/web_xsxk/cx_ggxx_xsxkcj.aspx?xsxh=%s&lb=%s";
 
 
     public static String LOG_ERROR_STR = "*-----------{}-----------*";
@@ -61,6 +65,8 @@ public class WebConstant {
     public static String ANORMAL_EXAMS = "不及格课程补考";
 
     public static String NORMAL_EXAMS = "学分制期末考试";
+
+    public static String COMMON_COURSE = "公共选修";
 
     public static String OK = "ok";
 
