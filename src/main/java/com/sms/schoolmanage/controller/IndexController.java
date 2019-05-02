@@ -3,6 +3,7 @@ package com.sms.schoolmanage.controller;
 import com.sms.schoolmanage.constants.WebConstant;
 import com.sms.schoolmanage.domain.*;
 import com.sms.schoolmanage.parseutils.DateUtil;
+import com.sms.schoolmanage.parseutils.ImageParseUtil;
 import com.sms.schoolmanage.parseutils.SpiderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -153,6 +154,13 @@ public class IndexController {
             map.put("result",WebConstant.OK);
             map.put("notices",notices);
             map.put("todayCourses",todayCourses);
+            String img="";
+            try {
+                img = ImageParseUtil.getURLImage();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            map.put("schoolDatePic", img);
         }else{
             map.put("result",WebConstant.NO);
         }

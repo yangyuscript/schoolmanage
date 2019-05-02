@@ -44,6 +44,11 @@ public class WebConstant {
      */
     public static String WEBSITE_LEVEL_TEST_URL="http://jwgl.nustti.edu.cn/web_cjgl/cx_cetjsj_xscj_xh.aspx";
 
+    /**
+     * 学校校历
+     */
+    public static String WEBSITE_SCHOOL_DATE_PIC_URL="http://www.nustti.edu.cn//ueditor/php/upload/image/20190216/1550281719898675.png";
+
 
 
 
